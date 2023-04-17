@@ -11,11 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Rust toolchain
-        uses: actions-rs/toolchain@v1
-
       - name: Check out code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Set up Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          ref: ${{ github.head_ref }}
+
+
 
       - name: Build and test
         run: |
